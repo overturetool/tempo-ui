@@ -1,0 +1,16 @@
+class Control
+
+instance variables
+static opCount : int :=0;
+
+operations
+public static CallOp : () ==> ()
+CallOp() == (
+-- perform the main logic here.
+opCount := opCount +1;
+-- values updated. notify UI. Will be replaced by binding
+IO`printf("Calling setter with %s:",[opCount]);
+tempo_uidemo_VdmCallables`setOpCount(opCount);
+)
+
+end Control
