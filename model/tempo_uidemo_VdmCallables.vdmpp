@@ -1,7 +1,0 @@
-class tempo_uidemo_VdmCallables
-
-operations
-public static setOpCount : int ==> ()
-setOpCount (x) == is not yet specified;
-
-end tempo_uidemo_VdmCallables
