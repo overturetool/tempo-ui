@@ -1,16 +1,17 @@
 class Control
 
 instance variables
-static opCount : int :=0;
+opCount : int;
 
 operations
-public static CallOp : () ==> ()
+public CallOp : () ==> ()
 CallOp() == (
 -- perform the main logic here.
 opCount := opCount +1;
--- values updated. notify UI. Will be replaced by binding
-IO`printf("Calling setter with %s:",[opCount]);
-tempo_uidemo_VdmCallables`setOpCount(opCount);
-)
+-- values updated. UI notified by binding.
+);
+
+public Control :()==>Control
+Control()==opCount:=0;
 
 end Control
