@@ -2,22 +2,19 @@ class Control
 
 instance variables
 opCount : int;
-opMsg: seq of char;
-flag :bool;
 
 operations
-public CallOp : () ==> ()
-CallOp() == (
-if flag then opMsg := "ding" else opMsg :="dong";
+public TickUp: () ==> ()
+TickUp() == (
 opCount := opCount +1;
-flag := not flag;
 );
+
+public Check : seq of char ==> int
+Check(text) == return len text;
 
 public Control :()==>Control
 Control()==(
 opCount:=0;
-opMsg := "";
-flag:=true;
 )
 
 end Control

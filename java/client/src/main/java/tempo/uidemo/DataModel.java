@@ -9,13 +9,18 @@ import net.java.html.json.Property;
  */
 @Model(className = "Data", targetId="", properties = {
     @Property(name = "opCount", type = long.class),
-    @Property(name = "opMsg", type = String.class)
+    @Property(name = "textLen", type = long.class),
+    @Property(name = "textToCheck", type = String.class)
 })
 final class DataModel {
 
 
-    @Function static void callOp(Data model) throws Exception {
-        VdmControl.callOp();
+    @Function static void tickUp(Data model) throws Exception {
+        VdmControl.tickUp();
+    }
+    
+    @Function static void checkText(Data model) throws Exception{
+    	VdmControl.checkText(model.getTextToCheck());
     }
 
     private static Data ui;

@@ -37,11 +37,18 @@ public class VdmControl implements RemoteControl {
 
 	private static final String ROOT_NAME = "root";
 	private static RemoteInterpreter interp;
+	private static Data d;
 
-	public static void callOp() throws Exception {
-		interp.execute(ROOT_NAME + ".CallOp()");
+	public static void tickUp() throws Exception {
+		interp.execute(ROOT_NAME + ".TickUp()");
 	}
 
+	public static void checkText(String textToCheck) throws Exception {
+		String line = ROOT_NAME + ".Check(\""+textToCheck+"\")";
+		Value v = interp.valueExecute(line);
+		d.setTextLen(v.intValue(null));
+	}
+	
 	/**
 	 * Link the interpreter. Start the browser in asynchronous mode.
 	 * 
@@ -65,10 +72,10 @@ public class VdmControl implements RemoteControl {
 	}
 
 	/**
-	 * Called when the page is ready. Attach listeners to bound variables.
+	 * Called when the page is ready. Attach listeners to bound variables and set initial values.
 	 */
 	public static void onPageLoad() throws Exception {
-		Data d = DataModel.onPageLoad();
+		d = DataModel.onPageLoad();
 		
 		ASeqSeqType stringType = new ASeqSeqType();
 		stringType.setSeqof(new ACharBasicType());
@@ -76,12 +83,14 @@ public class VdmControl implements RemoteControl {
 		List<BoundVarInfo> varsToBind = Arrays.asList(new BoundVarInfo[] {BoundVarInfo.create("opCount", new AIntNumericBasicType()),
 				BoundVarInfo.create("opMsg", stringType)});
 		
-		attachListeners(varsToBind, "new Control()", d);
+		d.setOpCount(0);
+		
+		attachListeners(varsToBind, "new Control()");
 		
 	}
 
 	public static void attachListeners(List<BoundVarInfo> vars,
-			String rootConstructor, Data d) throws Exception {
+			String rootConstructor) throws Exception {
 		String root = ROOT_NAME;
 		interp.create(root, rootConstructor);
 		Value v = interp.valueExecute(root);
@@ -117,5 +126,7 @@ public class VdmControl implements RemoteControl {
 
 		abstract PType type();
 	}
+
+
 
 }
