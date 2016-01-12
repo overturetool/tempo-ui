@@ -2,16 +2,22 @@ class Control
 
 instance variables
 opCount : int;
+opMsg: seq of char;
+flag :bool;
 
 operations
 public CallOp : () ==> ()
 CallOp() == (
--- perform the main logic here.
+if flag then opMsg := "ding" else opMsg :="dong";
 opCount := opCount +1;
--- values updated. UI notified by binding.
+flag := not flag;
 );
 
 public Control :()==>Control
-Control()==opCount:=0;
+Control()==(
+opCount:=0;
+opMsg := "";
+flag:=true;
+)
 
 end Control

@@ -5,10 +5,11 @@ import net.java.html.json.Model;
 import net.java.html.json.Property;
 
 /** Model annotation generates class Data with
- * one message property, boolean property and read only words property
+ * opCount numeric property and callOp function property
  */
 @Model(className = "Data", targetId="", properties = {
-    @Property(name = "opCount", type = long.class)
+    @Property(name = "opCount", type = long.class),
+    @Property(name = "opMsg", type = String.class)
 })
 final class DataModel {
 
@@ -18,8 +19,9 @@ final class DataModel {
     }
 
     private static Data ui;
+    
     /**
-     * Called when the page is ready.
+     * Called when the page is ready. Need to return the Data class for binding to VDM Vars.
      */
     static Data onPageLoad() throws Exception {
         ui = new Data();
