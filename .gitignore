@@ -1,2 +1,17 @@
 # Maven stuff
 target/
+
+# Binary files
+*.jar
+
+# Eclipse Metadata
+.classpath
+.project
+.settings
+
+# Overture stuff
+overture.properties
+
+# Vim metada
+.*~
+*.swp
