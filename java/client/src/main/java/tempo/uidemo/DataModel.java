@@ -20,7 +20,7 @@ final class DataModel {
     }
     
     @Function static void checkText(Data model) throws Exception{
-    	VdmControl.checkText(model.getTextToCheck());
+    	VdmControl.checkText(model, model.getTextToCheck());
     }
 
     private static Data ui;

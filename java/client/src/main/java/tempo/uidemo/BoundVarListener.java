@@ -22,11 +22,11 @@ import org.overture.interpreter.values.ValueListener;
  */
 public class BoundVarListener implements ValueListener {
 
-	final Data d;
+	final Object d;
 	final PType type;
 	final String setterName;
 
-	public BoundVarListener(Data d2, String name, PType t2) {
+	public BoundVarListener(Object d2, String name, PType t2) {
 		d = d2;
 		type = t2;
 		setterName = makeSetter(name);
