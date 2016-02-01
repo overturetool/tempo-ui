@@ -3,11 +3,6 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>org</groupId>
-        <artifactId>overturetool</artifactId>
-        <version>1.0-SNAPSHOT</version>
-    </parent>
 
     <groupId>org.overturetool</groupId>
     <artifactId>tempoui</artifactId>
@@ -25,6 +20,12 @@
             <groupId>org.netbeans.html</groupId>
             <artifactId>net.java.html.boot</artifactId>
             <version>1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.auto.value</groupId>
+            <artifactId>auto-value</artifactId>
+            <version>1.1</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 
