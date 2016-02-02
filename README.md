@@ -10,11 +10,15 @@ To build TempoUI, check it out and build with Maven;  `cd tempoui; mvn compile`.
 
 Usage
 ---
-To use TempoUI, create a Maven project and add the following dependency:
+To use TempoUI, create a DukeScript Maven project and add the following dependency:
 ```
- TBD
+<dependency>
+  <groupId>org.overturetool</groupId>
+  <artifactId>tempoui</artifactId>
+  <version>1.0-SNAPSHOT</version>
+</dependency>
 ```
-For more on how to construct a UI see the wiki page at https://github.com/overturetool/tempo-ui/wiki/Guidelines-for-Developing-Tempo-UIs
+For more on how to construct a UI see the wiki page at https://github.com/overturetool/tempo-ui/wiki/How-To-Use
 
 Development
 ---
