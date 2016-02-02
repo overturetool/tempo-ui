@@ -10,6 +10,6 @@ import net.java.html.json.Property;
 @Model(className = "VdmData",targetId="", properties = {
         @Property(name = "ok", type = boolean.class),
 })
-final class UiModelData {
+final class UiDataModel {
 
 }

@@ -13,14 +13,14 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * The ListenerAttacher binds variables in a VDM model to
+ * The ModelBinder binds variables in a VDM model to
  * UI elements in a DataModel. This is done by means of attaching
  * {@UiBindListener}s to the model.
  * <p>
  * Usage is simple. Instantiate with desired variables. Invoke {@link #attach()}.
  * Created by ldc on 01/02/16.
  */
-public class ListenerAttacher {
+public class ModelBinder {
 
     List<VarBindInfo> vars2Bind;
     Value root;
@@ -36,7 +36,7 @@ public class ListenerAttacher {
      * @param vars2Bind the list of variables to bind.
      * @param data      an Object reference to the class generated from the Data Model.
      */
-    public ListenerAttacher(Value root, List<VarBindInfo> vars2Bind, Object data) {
+    public ModelBinder(Value root, List<VarBindInfo> vars2Bind, Object data) {
         this.vars2Bind = vars2Bind;
         this.data = data;
         this.root=root;
