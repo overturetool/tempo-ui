@@ -26,6 +26,8 @@ bin
 # Overture stuff #
 ##################
 overture.properties
+vdmj.properties
+example/model/lib
 
 # Vim metafiles #
 #################
