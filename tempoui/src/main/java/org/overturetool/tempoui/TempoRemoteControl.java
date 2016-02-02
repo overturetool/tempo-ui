@@ -20,7 +20,7 @@ import java.util.logging.Logger;
  * <li>initialize the class generated
  * from the DataModel</li>
  * <li>initialise the interpreter by executing the VDM entry point expression</li>
- * <li>attach UI listeners to the model see ({@link ListenerAttacher}</li>
+ * <li>bind UI listeners to the model see ({@link ModelBinder}</li>
  * </ul>
  * </p>
  * Created by ldc on 01/02/16.
@@ -43,15 +43,15 @@ public class TempoRemoteControl implements RemoteControl {
     @Override
     public void run(RemoteInterpreter interpreter_) throws Exception {
         interpreter = interpreter_;
-        startBrowser();
+        startBrowser(this.getClass());
     }
 
-    protected void startBrowser() {
+    protected void startBrowser(final Class<?> rcClass) {
         new Thread(new Runnable() {
             public void run() {
                 try {
                     BrowserBuilder.newBrowser().loadPage("pages/index.html")
-                            .loadClass(this.getClass()).invoke("onPageLoad")
+                            .loadClass(rcClass).invoke("onPageLoad")
                             .showAndWait();
                     interpreter.finish();
                     System.exit(0);
