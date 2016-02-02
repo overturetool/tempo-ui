@@ -1,4 +1,4 @@
-TempoUI -- Modern UIs for VDM Models
+TempoUI -- Modern User Interfaces for VDM Models
 ===
 
 General Information
@@ -6,7 +6,7 @@ General Information
 TempoUI is a library for building UIs for VDM models using DukeScript
 and Overture. 
 
-To build TempoUI, check it out and build with Maven;  `cd tempoui; mvn compile`.
+To install TempoUI, check it out and build with Maven;  `cd tempoui; mvn install`.
 
 Usage
 ---
@@ -18,7 +18,7 @@ To use TempoUI, create a DukeScript Maven project and add the following dependen
   <version>1.0-SNAPSHOT</version>
 </dependency>
 ```
-For more on how to construct a UI see the wiki page at https://github.com/overturetool/tempo-ui/wiki/How-To-Use
+For more, see https://github.com/overturetool/tempo-ui/wiki/How-To-Use
 
 Development
 ---
