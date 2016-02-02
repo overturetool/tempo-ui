@@ -10,12 +10,24 @@ target/
 
 
 # IntelliJ Stuff #
+##################
 .idea
 *.iml
 
-# Overture stuff
+# eclipse noise #
+#################
+.metadata/
+.classpath
+.settings/
+.metadata/
+.project
+bin
+
+# Overture stuff #
+##################
 overture.properties
 
-# Vim metada
+# Vim metafiles #
+#################
 .*~
 *.swp
