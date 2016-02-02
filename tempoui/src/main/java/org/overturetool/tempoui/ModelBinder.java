@@ -1,9 +1,11 @@
 package org.overturetool.tempoui;
 
 import com.google.auto.value.AutoValue;
+import org.overture.ast.analysis.AnalysisException;
 import org.overture.ast.intf.lex.ILexNameToken;
 import org.overture.ast.types.PType;
 import org.overture.interpreter.debug.RemoteInterpreter;
+import org.overture.interpreter.runtime.Context;
 import org.overture.interpreter.values.NameValuePairMap;
 import org.overture.interpreter.values.ObjectValue;
 import org.overture.interpreter.values.UpdatableValue;
@@ -14,10 +16,12 @@ import java.util.Map;
 
 /**
  * The ModelBinder binds variables in a VDM model to
- * UI elements in a DataModel. This is done by means of attaching
- * {@UiBindListener}s to the model.
+ * UI elements in a DataModel.
  * <p>
- * Usage is simple. Instantiate with desired variables. Invoke {@link #attach()}.
+ * This consists of two things: setting the initial values in the data model
+ * and attaching {@UiBindListener}s to values of the VDM model.
+ * <p>
+ * To use it, instantiate with desired variables to bind. Invoke {@link #bind(Context)}.
  * Created by ldc on 01/02/16.
  */
 public class ModelBinder {
@@ -32,20 +36,21 @@ public class ModelBinder {
      * and type ({@link PType}) wrapped in a {@link VarBindInfo}.
      * A reference to the class generated from the Data Model is also needed.
      *
-     * @param root      the root value of the executed model, as returned by {@link RemoteInterpreter#create(String, String)}.
+     * @param root      the root {@link Value} of the executed model, as returned by the interpreter.
      * @param vars2Bind the list of variables to bind.
      * @param data      an Object reference to the class generated from the Data Model.
      */
     public ModelBinder(Value root, List<VarBindInfo> vars2Bind, Object data) {
         this.vars2Bind = vars2Bind;
         this.data = data;
-        this.root=root;
+        this.root = root;
     }
 
     /**
-     * Attach {@link UiBindListener}s to the submitted vars.
+     * Initialise UI Data with submitted vars and attach listeners.
+     *
      */
-    public void attach() {
+    public void bind() throws AnalysisException {
 
         if (root.deref() instanceof ObjectValue) {
             NameValuePairMap members = ((ObjectValue) root.deref()).members;
@@ -53,9 +58,10 @@ public class ModelBinder {
                 for (VarBindInfo bv : vars2Bind) {
                     if (bv.name().equals(p.getKey().getName())) {
                         if (p.getValue() instanceof UpdatableValue) {
+
                             UpdatableValue u = (UpdatableValue) p.getValue();
-                            u.addListener(new UiBindListener(data, bv.name(), bv.type()));
-                            //FIXME set initial values
+                            ValueReflectors.reflectIntoData(u, bv, data);
+                            u.addListener(new UiBindListener(data, bv));
                             break;
                         }
                     }
@@ -72,7 +78,7 @@ public class ModelBinder {
     @AutoValue
     public abstract static class VarBindInfo {
         public static VarBindInfo create(String name, PType type) {
-            return new AutoValue_ListenerAttacher_VarBindInfo(name, type);
+            return new AutoValue_ModelBinder_VarBindInfo(name, type);
         }
 
         abstract String name();
