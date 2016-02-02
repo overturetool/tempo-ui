@@ -36,7 +36,7 @@ public class ListenerAttacher {
      * @param vars2Bind the list of variables to bind.
      * @param data      an Object reference to the class generated from the Data Model.
      */
-    public ListenerAttacher(Value root, String rootConstructor, List<VarBindInfo> vars2Bind, Object data) {
+    public ListenerAttacher(Value root, List<VarBindInfo> vars2Bind, Object data) {
         this.vars2Bind = vars2Bind;
         this.data = data;
         this.root=root;
@@ -55,6 +55,7 @@ public class ListenerAttacher {
                         if (p.getValue() instanceof UpdatableValue) {
                             UpdatableValue u = (UpdatableValue) p.getValue();
                             u.addListener(new UiBindListener(data, bv.name(), bv.type()));
+                            //FIXME set initial values
                             break;
                         }
                     }
@@ -69,8 +70,8 @@ public class ListenerAttacher {
      * Build values with {@link #create(String, PType)}.
      */
     @AutoValue
-    abstract static class VarBindInfo {
-        static VarBindInfo create(String name, PType type) {
+    public abstract static class VarBindInfo {
+        public static VarBindInfo create(String name, PType type) {
             return new AutoValue_ListenerAttacher_VarBindInfo(name, type);
         }
 
