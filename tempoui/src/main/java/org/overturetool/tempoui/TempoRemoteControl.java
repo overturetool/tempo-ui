@@ -27,8 +27,7 @@ import java.util.logging.Logger;
  */
 public class TempoRemoteControl implements RemoteControl {
 
-    private static RemoteInterpreter interpreter;
-    private static Object data;
+    protected static RemoteInterpreter interpreter;
 
     /**
      * The run method is invoked when running a model from a VDM interpreter under remote control
@@ -47,7 +46,7 @@ public class TempoRemoteControl implements RemoteControl {
         startBrowser();
     }
 
-    private void startBrowser() {
+    protected void startBrowser() {
         new Thread(new Runnable() {
             public void run() {
                 try {
