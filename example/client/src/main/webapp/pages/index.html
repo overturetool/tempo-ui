@@ -15,9 +15,12 @@
     <main>
         <div id="content">
             <div class="innertube">
-                <h1>Status is </h1>
-                <div class="CSSTableGenerator" >
-                    <table >
+                <h1>Status is
+                    <em data-bind="if: statusOk" id="gstatus"> Ok</em>
+                    <em data-bind="ifnot: statusOk" id="bstatus"> Not Ok</em>.
+                </h1>
+                <div class="CSSTableGenerator">
+                    <table>
                         <tr>
                             <th>Expert</th>
                             <th>Period</th>
@@ -36,17 +39,20 @@
                     <tbody>
 
 
-
                     </tbody>
                 </table>
             </div>
         </div>
     </main>
     <nav>
+        <!--click: function(data, event) { myFunction('param1', 'param2', data, event)-->
+        <!--<button data-bind="click: function(data, event) { myFunction('param1', 'param2', data, event) }">-->
+        <!--Click me-->
+        <!--</button>-->
         <div class="innertube">
             <fieldset>
                 <legend>Add an Expert</legend>
-                <form action="demo_form.asp">
+                <form data-bind="submit: function(data,event) {addExpert(}">
                     <p>ID: <input type="text"></p>
                     <p> Qualifications:<br><select name="quali" multiple>
                         <option value="<Elec>">Elec</option>
@@ -64,6 +70,14 @@
                         <input value="Submit" type="submit">
                     </div>
                 </form>
+                <script type="text/javascript">
+                    var viewModel = {
+                        doSomething : function(formElement) {
+                            // ... now do something
+                        }
+                    };
+                </script>
+
             </fieldset>
 
         </div>

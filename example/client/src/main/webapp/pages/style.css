@@ -23,6 +23,13 @@
     width: 100%;
     }
 
+    #gstatus {
+        color:green;
+    }
+
+   #bstatus {
+        color:red;
+    }
     nav {
     padding-bottom: 10010px;
     margin-bottom: -10000px;
