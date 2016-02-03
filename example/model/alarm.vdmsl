@@ -1,0 +1,56 @@
+state Plant of
+  schedule : map Period to set of Expert
+  alarms   : set of Alarm
+  statusOk : bool
+  inv mk_Plant(schedule,-,-) ==
+	   forall exs in set rng schedule &
+	     exs <> {} and
+	       forall ex1, ex2 in set exs &
+          ex1 <> ex2 => ex1.expertid <> ex2.expertid 
+	init s == s = mk_Plant({|->},{},true)
+end 
+	    
+types
+  Period = token;
+
+  Expert :: expertid : ExpertId
+            quali    : Qualification;
+
+  ExpertId = token;
+
+  Qualification = <Elec> | <Mech> | <Bio> | <Chem>;
+	   
+  Alarm :: alarmtext : seq of char
+           quali     : Qualification
+
+
+operations
+AssignExpert : Expert * Period ==> ()
+AssignExpert(e,p) == (
+  if p in set dom schedule then
+    schedule(p) := schedule(p) union {e}
+  else
+    schedule := schedule munion {p|->{e}};
+  CheckStatus();
+)
+pre rng schedule <> {} => e not in set dinter rng schedule;
+
+AddAlarm : Alarm ==> ()
+AddAlarm(a) == (
+ alarms := alarms union {a};
+ CheckStatus();
+);
+
+CheckStatus : () ==> ()
+CheckStatus () == 
+let
+  newStatus = alarms <>  {} => schedule <> {|->} 
+              and forall exs in set rng schedule &  
+                                  {a.quali | a in set alarms} subset {e.quali | e in set exs}
+in
+  statusOk := newStatus;
+
+functions
+QualificationOK: set of Expert * set of Qualification -> bool
+QualificationOK(exs,reqquali) == {ex.quali | ex in set exs} = reqquali;
+
