@@ -1,13 +1,78 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>VDM Alarm Tempo UI</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-<h1 id="heading1">System Status</h1>
-<p>
-    Status is: <em data-bind="if: ok"style="color:green">Ok</em>  <em data-bind="ifnot: ok"style="color:red">Not Ok</em>
-</p>
+<header>
+    <div class="innertube">
+        <h1>Alarm Plant UI</h1>
+    </div>
+</header>
+<div id="wrapper">
+    <main>
+        <div id="content">
+            <div class="innertube">
+                <h1>Status is </h1>
+                <div class="CSSTableGenerator" >
+                    <table >
+                        <tr>
+                            <th>Expert</th>
+                            <th>Period</th>
+                            <th>Quali</th>
+                        </tr>
+                        <tr>
+                            <td>Id</td>
+                            <td>per</td>
+                            <td>Quali</td>
+                        </tr>
 
+                    </table>
+                </div>
+
+                <table>
+                    <tbody>
+
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+    <nav>
+        <div class="innertube">
+            <fieldset>
+                <legend>Add an Expert</legend>
+                <form action="demo_form.asp">
+                    <p>ID: <input type="text"></p>
+                    <p> Qualifications:<br><select name="quali" multiple>
+                        <option value="<Elec>">Elec</option>
+                        <option value="<Chem>">Chem</option>
+                        <option value="<Mech>">Mech</option>
+                        <option value="<Bio>">Bio</option>
+                    </select>
+                    </p>
+                    <p>
+                        Period: <select name="period">
+                        <option value="test">P1</option>
+                    </select>
+                    </p>
+                    <div>
+                        <input value="Submit" type="submit">
+                    </div>
+                </form>
+            </fieldset>
+
+        </div>
+    </nav>
+</div>
+<footer>
+    <div class="innertube">
+        <p> Made with <a target="_blank" href="https://github.com/overturetool/tempo-ui">TempoUI</a></p>
+    </div>
+</footer>
 </body>
 </html>
