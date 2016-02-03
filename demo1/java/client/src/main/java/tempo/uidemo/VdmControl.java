@@ -94,7 +94,7 @@ public class VdmControl implements RemoteControl {
 		String root = ROOT_NAME;
 		interp.create(root, rootConstructor);
 		Value v = interp.valueExecute(root);
-		if (v.deref() instanceof alue) {
+		if (v.deref() instanceof ObjectValue) {
 			NameValuePairMap members = ((ObjectValue) v.deref()).members;
 			for (Entry<ILexNameToken, Value> p : members.entrySet()) {
 				for (BoundVarInfo bv : vars) {
