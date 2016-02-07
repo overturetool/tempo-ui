@@ -72,7 +72,7 @@ public class ModelBinder {
         for (VarBindInfo bv : vars2Bind) {
             if (bv.name().equals(name)) {
                 if (v instanceof UpdatableValue) {
-                    UpdatableValue u = (UpdatableValue) p.getValue();
+                    UpdatableValue u = (UpdatableValue) v;
                     ValueReflectors.reflectIntoData(u, bv, data);
                     u.addListener(new UiBindListener(data, bv));
                     break;
