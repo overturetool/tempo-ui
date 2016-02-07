@@ -16,22 +16,26 @@
         <div id="content">
             <div class="innertube">
                 <h1>Status is
-                    <em data-bind="if: statusOk" id="gstatus"> Ok</em>
-                    <em data-bind="ifnot: statusOk" id="bstatus"> Not Ok</em>.
+                    <span data-bind="if: statusOk" id="gstatus">Ok</span>
+                    <span data-bind="ifnot: statusOk" id="bstatus">Not Ok</span>.
                 </h1>
                 <div class="CSSTableGenerator">
                     <table>
+                        <thead>
                         <tr>
-                            <th>Expert</th>
                             <th>Period</th>
+                            <th>Expert</th>
                             <th>Quali</th>
                         </tr>
+                        </thead>
+                        <tbody id="expertRow" data-bind="foreach: experts">
+                        <tr></tr>
                         <tr>
-                            <td>Id</td>
-                            <td>per</td>
-                            <td>Quali</td>
+                            <td data-bind="text: period"></td>
+                            <td data-bind="text: id"></td>
+                            <td data-bind="text: quali"></td>
                         </tr>
-
+                        </tbody>
                     </table>
                 </div>
 
@@ -45,39 +49,29 @@
         </div>
     </main>
     <nav>
-        <!--click: function(data, event) { myFunction('param1', 'param2', data, event)-->
-        <!--<button data-bind="click: function(data, event) { myFunction('param1', 'param2', data, event) }">-->
-        <!--Click me-->
-        <!--</button>-->
         <div class="innertube">
             <fieldset>
                 <legend>Add an Expert</legend>
-                <form data-bind="submit: function(data,event) {addExpert(}">
-                    <p>ID: <input type="text"></p>
-                    <p> Qualifications:<br><select name="quali" multiple>
+                <form data-bind="submit: addExpert">
+                    <p> Qualification: <select data-bind="value : expertQuali" name="quali">
                         <option value="<Elec>">Elec</option>
                         <option value="<Chem>">Chem</option>
                         <option value="<Mech>">Mech</option>
                         <option value="<Bio>">Bio</option>
                     </select>
                     </p>
-                    <p>
-                        Period: <select name="period">
-                        <option value="test">P1</option>
+                    <p>Period: <select data-bind="value: expertP" name="period">
+                        <option value="p1">P1</option>
+                        <option value="p2">P2</option>
+                        <option value="p3">P3</option>
+                        <option value="p4">P4</option>
+                        <option value="p5">P5</option>
                     </select>
                     </p>
                     <div>
-                        <input value="Submit" type="submit">
+                        <input text="Add!" type="submit">
                     </div>
                 </form>
-                <script type="text/javascript">
-                    var viewModel = {
-                        doSomething : function(formElement) {
-                            // ... now do something
-                        }
-                    };
-                </script>
-
             </fieldset>
 
         </div>
