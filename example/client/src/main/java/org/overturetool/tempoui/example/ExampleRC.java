@@ -15,20 +15,21 @@ import java.util.List;
 public class ExampleRC extends TempoRemoteControl {
 
     public static void onPageLoad() throws Exception {
+        // Connect UI to model interpreter
+        ModelAPI.setInterp(interpreter);
+
         // Create and bind DukeScript Data Model
         VdmData uiData = new VdmData();
         uiData.applyBindings();
 
-        // Build and execute entry point
-        String root = "plant";
-        String rootConstructor = "new Plant()";
-        interpreter.create(root, rootConstructor);
-        Value v = interpreter.valueExecute(root);
 
+        // Build and execute entry point
+        String root = "Plant";
+        Value v = interpreter.valueExecute(root);
 
         // Attach listeners to UI properties to VDM variables
         List<ModelBinder.VarBindInfo> vars = new ArrayList<>(1);
-        vars.add(ModelBinder.VarBindInfo.create("ok", new ABooleanBasicType()));
+        vars.add(ModelBinder.VarBindInfo.create("statusOk", new ABooleanBasicType()));
         ModelBinder la = new ModelBinder(v, vars, uiData);
         la.bind();
 
