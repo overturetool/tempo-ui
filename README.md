@@ -6,7 +6,7 @@ General Information
 TempoUI is a library for building HTML5-based UIs for VDM models using DukeScript
 and Overture. 
 
-To install TempoUI, check it out and build with Maven;  `cd tempoui; mvn install`.
+To install TempoUI, check it out and build with Maven;  `mvn install -f tempoui/pom.xml`.
 
 Usage
 ---
