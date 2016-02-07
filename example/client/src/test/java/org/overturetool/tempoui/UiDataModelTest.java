@@ -9,8 +9,8 @@ public class UiDataModelTest {
     @Test
     public void test_Ok_Property() {
         VdmData model = new VdmData();
-        model.setOk(false);
+        model.setStatusOk(false);
 
-        assertFalse(model.isOk());
+        assertFalse(model.isStatusOk());
     }
 }
