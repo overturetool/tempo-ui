@@ -19,8 +19,17 @@
                     <span data-bind="if: statusOk" id="gstatus">Ok</span>
                     <span data-bind="ifnot: statusOk" id="bstatus">Not Ok</span>.
                 </h1>
+
+
+                <h3>Active Alarms: <span data-bind="foreach: alarms">
+                    <em data-bind="text: $data"> </em>
+                </span>
+                </h3>
+
+
                 <div class="CSSTableGenerator">
                     <table>
+                        <caption>Duty Schedule</caption>
                         <thead>
                         <tr>
                             <th>Period</th>
@@ -39,12 +48,10 @@
                     </table>
                 </div>
 
-                <table>
-                    <tbody>
 
 
-                    </tbody>
-                </table>
+
+
             </div>
         </div>
     </main>
