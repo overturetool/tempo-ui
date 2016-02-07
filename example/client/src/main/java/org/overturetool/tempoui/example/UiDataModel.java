@@ -51,6 +51,17 @@ final class UiDataModel {
         return r;
     }
 
+    @ComputedProperty
+    static java.util.List<String> alarms(){
+        List<String> r = new ArrayList<>();
+        try {
+            r.addAll(ModelAPI.getAllAlarms());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return r;
+    }
+
     @Function
     static void addExpert(VdmData model, String data) throws Exception {
         ModelAPI.addExpert(string2Enum(model.getExpertQuali()), model.getExpertP());

@@ -1,6 +1,7 @@
 package org.overturetool.tempoui.example;
 
 import org.overture.interpreter.debug.RemoteInterpreter;
+import org.overture.interpreter.runtime.ValueException;
 import org.overture.interpreter.values.*;
 
 import java.util.ArrayList;
@@ -35,6 +36,21 @@ public class ModelAPI {
                         UiDataModel.string2Enum(rec.fieldmap.get("quali").quoteValue(null))));
             }
         }
+        return r;
+    }
+
+    public static List<String> getAllAlarms() throws Exception {
+        StringBuilder cmd = new StringBuilder();
+        cmd.append("alarms");
+        ValueSet alarms = interp.valueExecute(cmd.toString()).deref().setValue(null);
+
+        List<String> r = new ArrayList<>();
+
+        for (Value v : alarms) {
+            RecordValue rec = (RecordValue) v.deref();
+            r.add(rec.fieldmap.get("quali").quoteValue(null));
+        }
+
         return r;
     }
 
