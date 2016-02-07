@@ -7,9 +7,17 @@ state Plant of
 	     exs <> {} and
 	       forall ex1, ex2 in set exs &
           ex1 <> ex2 => ex1.expertid <> ex2.expertid 
-	init s == s = mk_Plant({|->},{},true)
+	init s == s = mk_Plant({|->},initalarms ,false)
 end 
-	    
+	   
+values
+initalarms = {
+    mk_Alarm("Short Circuit", <Elec>),
+    mk_Alarm("Busted Piston", <Mech>),
+    mk_Alarm("Gas Leak", <Bio>),
+    mk_Alarm("Explosion", <Chem>)}
+
+
 types
   Period = token;
 
