@@ -33,7 +33,7 @@ AssignExpert(e,p) == (
     schedule := schedule munion {p|->{e}};
   CheckStatus();
 )
-pre rng schedule <> {} => e not in set dinter rng schedule;
+pre p in set dom schedule => e not in set schedule(p);
 
 AddAlarm : Alarm ==> ()
 AddAlarm(a) == (
