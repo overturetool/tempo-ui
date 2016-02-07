@@ -12,10 +12,10 @@ end
 	   
 values
 initalarms = {
-    mk_Alarm("Short Circuit", <Elec>),
-    mk_Alarm("Busted Piston", <Mech>),
-    mk_Alarm("Gas Leak", <Bio>),
-    mk_Alarm("Explosion", <Chem>)}
+    mk_Alarm("Electrical Alarm", <Elec>),
+    mk_Alarm("Mechanical Alarm", <Mech>),
+    mk_Alarm("Bio Alarm", <Bio>),
+    mk_Alarm("Chemical Alarm", <Chem>)}
 
 
 types
@@ -51,14 +51,11 @@ AddAlarm(a) == (
 
 CheckStatus : () ==> ()
 CheckStatus () == 
-let
-  newStatus = alarms <>  {} => schedule <> {|->} 
-              and forall exs in set rng schedule &  
-                                  {a.quali | a in set alarms} subset {e.quali | e in set exs}
-in
-  statusOk := newStatus;
-
-functions
-QualificationOK: set of Expert * set of Qualification -> bool
-QualificationOK(exs,reqquali) == {ex.quali | ex in set exs} = reqquali;
+    let
+      newStatus = alarms <>  {} => schedule <> {|->} 
+                  and 
+                  forall assigned in set rng schedule
+                    & {e.quali | e in set assigned} = {a.quali |a in set alarms}
+    in
+      statusOk := newStatus;
 
