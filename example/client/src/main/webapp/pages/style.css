@@ -30,6 +30,11 @@
    #bstatus {
         color:red;
     }
+
+    #activeAlarm{
+    color:orange;
+    }
+
     nav {
     padding-bottom: 10010px;
     margin-bottom: -10000px;
