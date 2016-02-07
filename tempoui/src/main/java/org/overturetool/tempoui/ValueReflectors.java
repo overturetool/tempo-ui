@@ -2,7 +2,10 @@ package org.overturetool.tempoui;
 
 import org.overture.ast.analysis.AnalysisException;
 import org.overture.ast.types.*;
+import org.overture.interpreter.assistant.IInterpreterAssistantFactory;
+import org.overture.interpreter.assistant.type.PTypeAssistantInterpreter;
 import org.overture.interpreter.runtime.Context;
+import org.overture.interpreter.runtime.Interpreter;
 import org.overture.interpreter.runtime.ValueException;
 import org.overture.interpreter.values.Value;
 
@@ -29,17 +32,18 @@ public abstract class ValueReflectors {
      *                           the concrete type information of the value.
      */
     public static void reflectIntoData(Value value, ModelBinder.VarBindInfo var, Context ctxt, Object data) throws AnalysisException {
+        IInterpreterAssistantFactory assistantFactory = (ctxt == null) ? Interpreter.getInstance().getAssistantFactory() : ctxt.assistantFactory;
 
         try {
 
-            if (ctxt.assistantFactory.createPTypeAssistant().isType(var.type(),
+            if (assistantFactory.createPTypeAssistant().isType(var.type(),
                     AIntNumericBasicType.class)) {
                 Method method;
                 method = data.getClass().getDeclaredMethod(makeSetter(var.name()), long.class);
                 method.invoke(data, value.intValue(ctxt));
             }
 
-            if (ctxt.assistantFactory.createPTypeAssistant().isType(var.type(),
+            if (assistantFactory.createPTypeAssistant().isType(var.type(),
                     ARealNumericBasicType.class)) {
                 Method method;
                 method = data.getClass().getDeclaredMethod(makeSetter(var.name()),
@@ -47,7 +51,7 @@ public abstract class ValueReflectors {
                 method.invoke(data, value.stringValue(ctxt));
             }
 
-            if (ctxt.assistantFactory.createPTypeAssistant().isType(var.type(),
+            if (assistantFactory.createPTypeAssistant().isType(var.type(),
                     ABooleanBasicType.class)) {
                 Method method;
                 method = data.getClass().getDeclaredMethod(makeSetter(var.name()),
@@ -55,7 +59,7 @@ public abstract class ValueReflectors {
                 method.invoke(data, value.boolValue(ctxt));
             }
 
-            if (isString(var.type(), ctxt)) {
+            if (isString(var.type(), assistantFactory.createPTypeAssistant())) {
                 Method method;
                 method = data.getClass().getDeclaredMethod(makeSetter(var.name()),
                         String.class);
@@ -87,17 +91,17 @@ public abstract class ValueReflectors {
      *                           the concrete type information of the value.
      */
     public static void reflectIntoData(Value value, ModelBinder.VarBindInfo var, Object data) throws AnalysisException {
-        reflectIntoData(value, var, null, data);
+        reflectIntoData(value, var,null, data);
     }
 
-    private static boolean isString(PType type, Context ctxt)
+    private static boolean isString(PType type, PTypeAssistantInterpreter pTypeAssistant)
             throws NoSuchMethodException, IllegalAccessException,
             InvocationTargetException, ValueException {
 
-        return ctxt.assistantFactory.createPTypeAssistant().isSeq(type) // is
+        return pTypeAssistant.isSeq(type) // is
                 // Seq
-                && ctxt.assistantFactory.createPTypeAssistant().isType(
-                ctxt.assistantFactory.createPTypeAssistant() // of char
+                && pTypeAssistant.isType(
+                pTypeAssistant // of char
                         .getSeq(type).getSeqof(), ACharBasicType.class);
 
     }
